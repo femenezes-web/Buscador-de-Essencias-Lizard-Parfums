@@ -10,7 +10,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'by-new-york',
     name: 'By New York Perfumes',
     url: 'https://www.bynewyorkperfumes.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511982345671',
     region: StoreRegion.SP,
     isVerified: true,
@@ -20,7 +20,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'julia-essencias',
     name: 'Julia Essências',
     url: 'https://juliaessencias.com.br/',
-    platform: ECommercePlatform.LOJA_INTEGRADA,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511976543210',
     region: StoreRegion.SP,
     isVerified: true,
@@ -30,7 +30,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'studio-olfativo',
     name: 'Studio Olfativo',
     url: 'https://loja.studioolfativo.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511912345678',
     region: StoreRegion.SP,
     isVerified: true,
@@ -40,7 +40,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'inter-essencias',
     name: 'Inter Essências',
     url: 'https://interessencias.com.br/',
-    platform: ECommercePlatform.OPENCART,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511933334444',
     region: StoreRegion.SP,
     isVerified: true,
@@ -50,7 +50,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'cantinho-das-essencias',
     name: 'Cantinho das Essências',
     url: 'https://www.cantinhodasessencias.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5531988887777',
     region: StoreRegion.MG,
     isVerified: true,
@@ -70,7 +70,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'nova-essencia',
     name: 'Nova Essência',
     url: 'https://novaessencia.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.RJ,
     isVerified: true,
     tags: ['essencias']
@@ -79,7 +79,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'palacio-das-essencias',
     name: 'Palácio das Essências',
     url: 'https://palaciodasessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5531977775555',
     region: StoreRegion.MG,
     isVerified: true,
@@ -89,7 +89,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'essencial-essencias',
     name: 'Essencial Essências',
     url: 'https://www.essencialessencias.com/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511944442222',
     region: StoreRegion.SP,
     isVerified: true,
@@ -99,7 +99,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'arte-feita',
     name: 'Artefeita',
     url: 'https://www.artefeita.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.RS,
     isVerified: true,
     tags: ['essencias']
@@ -108,7 +108,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'atr-essencias',
     name: 'ATR Essências',
     url: 'https://www.atressencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511955556666',
     region: StoreRegion.SP,
     isVerified: true,
@@ -118,7 +118,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'fasina-aroma',
     name: 'Fasina Aroma',
     url: 'https://fasinaaroma.com/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -127,7 +127,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'emporio-das-essencias',
     name: 'Empório das Essências',
     url: 'https://www.emporiodasessencias.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: true,
     tags: ['essencias']
@@ -136,7 +136,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-das-essencias',
     name: 'Casa das Essências',
     url: 'https://www.casadasessencias.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511922221111',
     region: StoreRegion.SP,
     isVerified: true,
@@ -146,7 +146,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'paris-essencias',
     name: 'Paris Essências',
     url: 'https://www.lojaparisessencias.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511933335555',
     region: StoreRegion.SP,
     isVerified: true,
@@ -156,7 +156,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-do-saboeiro',
     name: 'Casa do Saboeiro',
     url: 'https://www.casadosaboeiro.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SC,
     isVerified: true,
     tags: ['essencias']
@@ -174,7 +174,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'la-casa-de-cheiros-jp',
     name: 'La Casa de Cheiros JP',
     url: 'https://lacasadecheirosjp.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.NE,
     isVerified: false,
     tags: ['essencias']
@@ -183,7 +183,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'big-essencias',
     name: 'Big Essências',
     url: 'https://www.bigessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511944445555',
     region: StoreRegion.SP,
     isVerified: true,
@@ -193,7 +193,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'imperio-do-banho',
     name: 'Império do Banho',
     url: 'https://www.imperiodobanho.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     whatsapp: '5511977771111',
     region: StoreRegion.SP,
     isVerified: true,
@@ -203,7 +203,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'victoire-essencias',
     name: 'Victoire Essências',
     url: 'https://www.victoireessencias.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -212,7 +212,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'essencia-e-cia',
     name: 'Essência & Cia',
     url: 'https://essenciaecia.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: true,
     tags: ['essencias']
@@ -221,7 +221,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'super-essencias',
     name: 'Super Essências',
     url: 'https://www.superessencias.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -230,7 +230,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'perfumaria-reduto',
     name: 'Perfumaria Reduto',
     url: 'https://www.perfumariareduto.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: true,
     tags: ['essencias']
@@ -239,7 +239,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'toda-essencia',
     name: 'Toda Essência',
     url: 'https://www.lojatodaessencia.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -248,7 +248,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'prime-essencias',
     name: 'Prime Essências',
     url: 'https://primeessencias.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -257,7 +257,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'big-fonte-essencias',
     name: 'Big Fonte das Essências',
     url: 'https://bigfontedasessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -266,7 +266,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'flower-produtos',
     name: 'Flower Produtos',
     url: 'https://www.flowerprodutos.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias', 'embalagens']
@@ -275,7 +275,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-de-essencias',
     name: 'Casa de Essências',
     url: 'https://www.casadeessencias.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -284,7 +284,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-das-essencias-original',
     name: 'Casa das Essências Original',
     url: 'https://www.casadasessenciasoriginal.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: true,
     tags: ['essencias']
@@ -293,7 +293,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'aroma-e-amor',
     name: 'Aroma & Amor',
     url: 'https://www.aromaeamor.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -302,7 +302,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'rainha-das-essencias',
     name: 'Rainha das Essências',
     url: 'https://loja.rainhadasessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -311,7 +311,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'paraiso-das-essencias',
     name: 'Paraíso das Essências',
     url: 'http://www.paraisodasessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -320,7 +320,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'irmaos-haluli',
     name: 'Irmãos Haluli',
     url: 'https://www.irmaoshaluli.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.NE,
     isVerified: true,
     tags: ['embalagens', 'vidros']
@@ -329,7 +329,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'dna-perfumes',
     name: 'DNA Perfumes',
     url: 'https://www.dnaperfumes.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['embalagens', 'essencias']
@@ -347,7 +347,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'essencias-curitiba',
     name: 'Essências Curitiba',
     url: 'https://www.essenciascuritiba.com.br/loja',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.PR,
     isVerified: false,
     tags: ['essencias']
@@ -356,7 +356,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'harmoni-aromas',
     name: 'Harmoni Aromas',
     url: 'https://www.harmoniaromas.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -365,7 +365,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'atenas-essencias',
     name: 'Atenas Essências',
     url: 'https://siteatenasessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -374,7 +374,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'eu-perfumista',
     name: 'Eu Perfumista',
     url: 'https://www.euperfumista.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -383,7 +383,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'wanny-essencias',
     name: 'Wanny Essências',
     url: 'https://wannyessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -392,7 +392,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'principal-essencias',
     name: 'Principal Essências',
     url: 'https://principalessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -401,7 +401,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-essencias-uberlandia',
     name: 'Casa das Essências Uberlândia',
     url: 'https://casadasessenciasuberlandia.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.MG,
     isVerified: false,
     tags: ['essencias']
@@ -410,7 +410,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'deposito-das-essencias',
     name: 'Depósito das Essências',
     url: 'https://www.depositodasessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -419,7 +419,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'la-casa-de-cheiro',
     name: 'La Casa de Cheiro',
     url: 'https://lacasadecheiro.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.NE,
     isVerified: false,
     tags: ['essencias']
@@ -428,7 +428,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'essencias-e-aroma',
     name: 'Essências e Aroma',
     url: 'https://www.essenciasearoma.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -437,7 +437,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-essencias-bh',
     name: 'Casa das Essências BH',
     url: 'http://www.casadasessenciasbh.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.MG,
     isVerified: false,
     tags: ['essencias']
@@ -446,7 +446,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'mix-das-essencias',
     name: 'Mix das Essências',
     url: 'https://www.mixdasessencias.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -455,7 +455,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-do-perfumista',
     name: 'Casa do Perfumista',
     url: 'https://www.casadoperfumista.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -464,7 +464,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-dos-quimicos',
     name: 'Casa dos Químicos',
     url: 'https://www.casadosquimicos.com.br/',
-    platform: ECommercePlatform.TRAY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -473,7 +473,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'vaporo',
     name: 'Vaporo',
     url: 'https://www.vaporo.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -482,7 +482,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'essencias-e-cia-b',
     name: 'Essências & Cia (Nacional)',
     url: 'https://www.essenciasecia.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -491,7 +491,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'essencias-boreal',
     name: 'Essências Boreal',
     url: 'https://www.essenciasboreal.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -500,7 +500,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-das-fragrancias',
     name: 'Casa das Fragrâncias',
     url: 'https://casadasfragrancias.com/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.RJ,
     isVerified: false,
     tags: ['essencias']
@@ -509,7 +509,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casinha-das-essencias',
     name: 'Casinha das Essências',
     url: 'https://www.casinhadasessencias.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -518,7 +518,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'mundo-das-essencias',
     name: 'Mundo das Essências',
     url: 'https://www.mundodasessencias.com/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -527,7 +527,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'essencias-cia-real',
     name: 'Essências Cia',
     url: 'https://essenciascia.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -536,7 +536,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'espaco-das-essencias',
     name: 'Espaço das Essências',
     url: 'https://www.espacodasessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -545,7 +545,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'central-das-essencias-loja',
     name: 'Central das Essências Loja',
     url: 'https://www.lojacentraldasessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -554,7 +554,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'casa-do-sabonete',
     name: 'Casa do Sabonete',
     url: 'https://www.casadosabonete.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -563,7 +563,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'central-das-essencias',
     name: 'Central das Essências',
     url: 'https://www.centraldasessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -572,7 +572,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'mercadao-das-essencias',
     name: 'Mercadão das Essências',
     url: 'https://mercadaodasessencias.com/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -581,7 +581,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'neuro-aroma',
     name: 'Neuro Aroma',
     url: 'https://neuroaroma.com/',
-    platform: ECommercePlatform.SHOPIFY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -590,7 +590,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'pano-artes',
     name: 'Pano Artes',
     url: 'https://www.panoartes.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['embalagens']
@@ -599,7 +599,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'az-fragrancias',
     name: 'AZ Fragrâncias',
     url: 'https://www.azfragrancias.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -608,7 +608,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'dairin-essencias',
     name: 'Dairin Essências e Arte',
     url: 'https://www.dairinessenciasearte.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -617,7 +617,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'aromas-do-rei',
     name: 'Aromas do Rei',
     url: 'https://aromasdorei.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -626,7 +626,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'fabrica-de-aromas',
     name: 'Fábrica de Aromas',
     url: 'https://www.fabricadearomas.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -635,7 +635,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'web-das-essencias',
     name: 'Web das Essências',
     url: 'https://www.webdasessencias.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -644,7 +644,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'parissima',
     name: 'Paríssima',
     url: 'https://www.parissima.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -653,7 +653,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'perfumistta',
     name: 'Perfumistta',
     url: 'https://perfumistta.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -662,7 +662,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'recanto-das-essencias',
     name: 'Recanto das Essências',
     url: 'https://www.recantodasessencias.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -671,7 +671,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'so-essencias',
     name: 'Só Essências',
     url: 'https://www.soessencias.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -680,7 +680,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'emporio-essenza',
     name: 'Empório Essenza',
     url: 'https://www.lojaemporioessenza.com.br/',
-    platform: ECommercePlatform.SHOPIFY,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SC,
     isVerified: false,
     tags: ['essencias']
@@ -689,7 +689,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'bellaria',
     name: 'Bellaria',
     url: 'https://www.lojabellaria.com.br/',
-    platform: ECommercePlatform.WOOCOMMERCE,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
@@ -698,7 +698,7 @@ export const INITIAL_STORES: Store[] = [
     id: 'aroma-incrivel',
     name: 'Aroma Incrível',
     url: 'https://aromaincrivel.com.br/',
-    platform: ECommercePlatform.NUVEMSHOP,
+    platform: ECommercePlatform.GOOGLE_FALLBACK,
     region: StoreRegion.SP,
     isVerified: false,
     tags: ['essencias']
