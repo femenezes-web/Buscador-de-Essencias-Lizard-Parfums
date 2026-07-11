@@ -1,0 +1,6 @@
+{
+  "name": "Buscador Lizard Parfums",
+  "description": "Busca centralizada de insumos de perfumaria artesanal com direcionamento direto para lojas parceiras.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
