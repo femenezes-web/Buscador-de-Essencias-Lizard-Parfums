@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "Store": {
+      "title": "Store",
+      "description": "Representa um fornecedor de insumos de perfumaria",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string" },
+        "platform": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "region": { "type": "string" },
+        "isVerified": { "type": "boolean" },
+        "tags": { "type": "array" }
+      },
+      "required": ["id", "name", "url", "region", "platform"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Representa um produto específico encontrado em um fornecedor",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string" },
+        "price": { "type": "number" },
+        "storeId": { "type": "string" },
+        "lastConfirmedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "url", "storeId", "lastConfirmedAt"]
+    },
+    "Essence": {
+      "title": "Essence",
+      "description": "Essência de referência no catálogo canônico",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "canonicalName": { "type": "string" },
+        "brandHouse": { "type": "string" },
+        "category": { "type": "string" },
+        "synonyms": { "type": "array" }
+      },
+      "required": ["id", "canonicalName", "category", "synonyms"]
+    },
+    "EssenceAlias": {
+      "title": "EssenceAlias",
+      "description": "Mapeamento de um apelido ou nome alternativo para uma essência canônica",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "alias": { "type": "string" },
+        "essenceId": { "type": "string" },
+        "canonicalName": { "type": "string" }
+      },
+      "required": ["id", "alias", "essenceId", "canonicalName"]
+    }
+  },
+  "firestore": {
+    "/stores/{storeId}": {
+      "schema": "Store",
+      "description": "Coleção de fornecedores cadastrados"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Coleção de produtos cadastrados de cada fornecedor"
+    },
+    "/essences/{essenceId}": {
+      "schema": "Essence",
+      "description": "Coleção canônica de fragrâncias de referência"
+    },
+    "/essence_aliases/{aliasId}": {
+      "schema": "EssenceAlias",
+      "description": "Coleção de apelidos de essências e seus respectivos mapeamentos canônicos"
+    }
+  }
+}

@@ -50,3 +50,12 @@ export interface SearchHistoryItem {
   term: string;
   timestamp: number;
 }
+
+export interface Product {
+  id: string;
+  name: string;
+  url: string;
+  price: number;
+  storeId: string;
+  lastConfirmedAt: string;
+}

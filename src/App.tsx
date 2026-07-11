@@ -19,16 +19,19 @@ import {
   ListFilter,
   CheckSquare,
   Square,
-  RotateCcw
+  RotateCcw,
+  Database,
+  RefreshCw
 } from 'lucide-react';
 
-import { ECommercePlatform, StoreRegion, Store, Essence, SearchHistoryItem } from './types';
+import { ECommercePlatform, StoreRegion, Store, Essence, SearchHistoryItem, Product } from './types';
 import { INITIAL_STORES } from './data/stores';
 import { INITIAL_ESSENCES } from './data/essences';
 import { findBestEssenceMatch } from './utils/search';
 
 import SearchBox from './components/SearchBox';
 import StoreCard from './components/StoreCard';
+import ProductCard from './components/ProductCard';
 import AliasSection from './components/AliasSection';
 import AddStoreModal from './components/AddStoreModal';
 import RecentSearches from './components/RecentSearches';
@@ -73,6 +76,13 @@ export default function App() {
     return saved ? JSON.parse(saved) : [];
   });
 
+  // --- Firestore Connected States ---
+  const [searchProducts, setSearchProducts] = useState<Product[]>([]);
+  const [searchMatchedEssence, setSearchMatchedEssence] = useState<any | null>(null);
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
+  const [isScraping, setIsScraping] = useState(false);
+  const [scrapingStatus, setScrapingStatus] = useState<string | null>(null);
+
   // --- Active Search and Filters ---
   const [searchTerm, setSearchTerm] = useState('');
   const [activeSearch, setActiveSearch] = useState('');
@@ -83,6 +93,24 @@ export default function App() {
   const [selectedStoreIds, setSelectedStoreIds] = useState<string[]>([]);
   const [storeSearchFilter, setStoreSearchFilter] = useState('');
   const [activePreset, setActivePreset] = useState<'all' | 'grandes' | 'sp' | 'mg' | 'embalagens'>('all');
+
+  // --- Load live stores from database ---
+  useEffect(() => {
+    const loadStores = async () => {
+      try {
+        const res = await fetch('/api/stores');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.length > 0) {
+            setStores(data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load stores from DB:", err);
+      }
+    };
+    loadStores();
+  }, []);
 
   // --- Sync storage changes ---
   useEffect(() => {
@@ -102,7 +130,7 @@ export default function App() {
   }, [searchHistory]);
 
   // --- Search Committed handler ---
-  const handleSearch = (term: string) => {
+  const handleSearch = async (term: string) => {
     const cleanTerm = term.trim();
     setActiveSearch(cleanTerm);
     
@@ -117,6 +145,24 @@ export default function App() {
         };
         return [newItem, ...filtered].slice(0, 10); // keep last 10
       });
+
+      // Fetch matching products and canonical essence from Firestore search API
+      setIsSearchLoading(true);
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(cleanTerm)}`);
+        if (res.ok) {
+          const data = await res.json();
+          setSearchProducts(data.products || []);
+          setSearchMatchedEssence(data.matchedEssence || null);
+        }
+      } catch (err) {
+        console.error("Error searching in Firestore:", err);
+      } finally {
+        setIsSearchLoading(false);
+      }
+    } else {
+      setSearchProducts([]);
+      setSearchMatchedEssence(null);
     }
   };
 
@@ -164,17 +210,65 @@ export default function App() {
     setEssences(prev => [...prev, newEssence]);
     // Set this newly created canonical essence as the active matched term
     setSearchTerm(canonicalName);
-    setActiveSearch(canonicalName);
+    handleSearch(canonicalName);
   };
 
   // --- Adding a manually suggested store ---
-  const handleAddStore = (newStoreData: Omit<Store, 'id' | 'isVerified'>) => {
-    const newStore: Store = {
-      ...newStoreData,
-      id: `store-${Date.now()}`,
-      isVerified: false // Added by community, pending review
-    };
-    setStores(prev => [newStore, ...prev]);
+  const handleAddStore = async (newStoreData: Omit<Store, 'id' | 'isVerified'>) => {
+    try {
+      const res = await fetch('/api/stores', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newStoreData)
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.store) {
+          setStores(prev => [data.store, ...prev]);
+        }
+      } else {
+        // Fallback local addition if API is unavailable
+        const newStore: Store = {
+          ...newStoreData,
+          id: `store-${Date.now()}`,
+          isVerified: false
+        };
+        setStores(prev => [newStore, ...prev]);
+      }
+    } catch (err) {
+      console.error("Error saving suggested store:", err);
+      const newStore: Store = {
+        ...newStoreData,
+        id: `store-${Date.now()}`,
+        isVerified: false
+      };
+      setStores(prev => [newStore, ...prev]);
+    }
+  };
+
+  // --- Run scraper endpoint ---
+  const handleRunScraper = async () => {
+    setIsScraping(true);
+    setScrapingStatus("Sincronizando lojas via XML sitemaps...");
+    try {
+      const res = await fetch('/api/scraper/run', { method: 'POST' });
+      if (res.ok) {
+        const data = await res.json();
+        setScrapingStatus(`Sucesso! Sincronizados ${data.totalProductsSynced || 0} produtos no banco!`);
+        if (activeSearch) {
+          // Re-search to load the newly scraped products
+          handleSearch(activeSearch);
+        }
+      } else {
+        setScrapingStatus("Erro na sincronização automática.");
+      }
+    } catch (err) {
+      console.error(err);
+      setScrapingStatus("Erro de conexão.");
+    } finally {
+      setIsScraping(false);
+      setTimeout(() => setScrapingStatus(null), 4000);
+    }
   };
 
   // --- Matching algorithm ---
@@ -296,11 +390,32 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
+            {scrapingStatus && (
+              <span className="text-[10px] text-gold-400 font-mono bg-coal-950/90 px-3 py-1.5 rounded border border-[#d4af37]/20 animate-pulse hidden md:inline-block">
+                {scrapingStatus}
+              </span>
+            )}
+            
+            <button
+              id="sync-catalog-header"
+              type="button"
+              disabled={isScraping}
+              onClick={handleRunScraper}
+              className={`flex items-center gap-1.5 text-[11px] px-4 py-2 rounded transition-all duration-300 font-serif uppercase tracking-wider font-semibold border ${
+                isScraping 
+                  ? 'bg-coal-900 border-coal-800 text-coal-500 cursor-not-allowed'
+                  : 'bg-coal-950 hover:bg-coal-900 border-[#d4af37]/30 hover:border-[#d4af37] text-gold-400 hover:text-[#d4af37]'
+              }`}
+            >
+              <RefreshCw className={`w-3.5 h-3.5 shrink-0 ${isScraping ? 'animate-spin text-[#d4af37]' : ''}`} />
+              {isScraping ? 'Sincronizando...' : 'Sincronizar Lojas'}
+            </button>
+
             <button
               id="add-new-supplier-header"
               type="button"
               onClick={() => setIsAddStoreOpen(true)}
-              className="flex items-center gap-1.5 text-[11px] bg-coal-950 hover:bg-coal-900 border border-[#d4af37]/30 hover:border-[#d4af37] text-gold-400 hover:text-[#d4af37] px-4 py-2 rounded transition-all duration-300 font-serif uppercase tracking-wider font-semibold"
+              className="flex items-center gap-1.5 text-[11px] bg-[#d4af37] hover:bg-[#b5942b] text-[#0a0a0a] px-4 py-2 rounded transition-all duration-300 font-serif uppercase tracking-wider font-bold"
             >
               <Plus className="w-3.5 h-3.5 shrink-0" />
               Sugerir Loja
@@ -614,46 +729,100 @@ export default function App() {
                 </aside>
 
                 {/* 2. MAIN GRID RESULTS PANEL */}
-                <div className="lg:col-span-3 space-y-4">
+                <div className="lg:col-span-3 space-y-8">
                   
-                  {/* Results Title Section */}
-                  <div className="flex items-center justify-between border-b border-[#d4af37]/15 pb-3">
-                    <h3 className="font-serif text-lg text-white font-medium">
-                      Onde buscar: "{activeSearch}"
-                    </h3>
-                    <span className="text-xs text-coal-400 font-mono uppercase tracking-wider bg-[#121212] px-3 py-1 rounded border border-[#d4af37]/20">
-                      Ordem Alfabética
-                    </span>
+                  {/* DIRECT PRODUCTS FROM DATABASE SECTION */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between border-b border-[#d4af37]/15 pb-3">
+                      <h3 className="font-serif text-lg text-white font-medium flex items-center gap-2">
+                        <Database className="w-5 h-5 text-[#d4af37] shrink-0" />
+                        Produtos Encontrados na Base ({searchProducts.length})
+                      </h3>
+                      <span className="text-[10px] text-coal-400 uppercase tracking-widest bg-coal-950 px-2.5 py-1 rounded border border-coal-800">
+                        Preços e Links Diretos
+                      </span>
+                    </div>
+
+                    {isSearchLoading ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {[1, 2, 3].map((n) => (
+                          <div key={n} className="bg-[#121212] border border-[#d4af37]/5 rounded-lg p-5 animate-pulse space-y-4">
+                            <div className="h-4 bg-coal-800 rounded w-1/3"></div>
+                            <div className="h-6 bg-coal-800 rounded w-3/4"></div>
+                            <div className="h-4 bg-coal-800 rounded w-1/2"></div>
+                            <div className="pt-4 border-t border-coal-800/50 flex justify-between">
+                              <div className="h-6 bg-coal-800 rounded w-1/4"></div>
+                              <div className="h-6 bg-coal-800 rounded w-1/4"></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : searchProducts.length > 0 ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {searchProducts.map((product) => {
+                          const associatedStore = stores.find(s => s.id === product.storeId);
+                          return (
+                            <ProductCard 
+                              key={product.id} 
+                              product={product} 
+                              store={associatedStore} 
+                            />
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className="bg-[#121212]/40 border border-coal-800 p-6 rounded-lg text-center max-w-2xl mx-auto space-y-3">
+                        <Info className="w-8 h-8 text-[#d4af37]/60 mx-auto" />
+                        <h4 className="font-serif text-sm font-semibold text-white">Nenhum produto com link direto cadastrado para este termo ainda</h4>
+                        <p className="text-xs text-coal-400">
+                          Nossa base ainda não possui produtos indexados com preços exatos para "{activeSearch}". 
+                          Porém, você pode usar nossa ferramenta inteligente abaixo para buscar diretamente nas lojas parceiras com apenas um clique!
+                        </p>
+                      </div>
+                    )}
                   </div>
 
-                  {displayedStores.length === 0 ? (
-                    <div id="no-stores-matching-filter-view" className="text-center py-16 bg-[#121212] rounded border border-[#d4af37]/20 animate-in fade-in">
-                      <Info className="w-12 h-12 text-[#d4af37]/80 mx-auto mb-3" />
-                      <h4 className="font-serif text-lg text-white font-medium mb-1">Nenhuma loja selecionada</h4>
-                      <p className="text-xs text-coal-400 max-w-xs mx-auto mb-4">
-                        Ajuste os filtros na barra lateral ou clique no botão abaixo para restaurar todos os fornecedores.
-                      </p>
-                      <button
-                        type="button"
-                        onClick={handleSelectAllStores}
-                        className="bg-[#d4af37] hover:bg-[#b5942b] text-[#0a0a0a] text-xs font-bold uppercase tracking-wider px-4 py-2 rounded transition-all"
-                      >
-                        Restaurar todos os fornecedores
-                      </button>
+                  {/* FALLBACK/LIVE SEARCH PARTNERS SECTION */}
+                  <div className="space-y-4 pt-4 border-t border-coal-900">
+                    <div className="flex items-center justify-between border-b border-[#d4af37]/15 pb-3">
+                      <h3 className="font-serif text-lg text-white font-medium flex items-center gap-2">
+                        <SlidersHorizontal className="w-5 h-5 text-[#d4af37] shrink-0" />
+                        Buscar Diretamente nos Parceiros ({displayedStores.length})
+                      </h3>
+                      <span className="text-xs text-coal-400 font-mono uppercase tracking-wider bg-[#121212] px-3 py-1 rounded border border-[#d4af37]/20">
+                        Links de Busca On-demand
+                      </span>
                     </div>
-                  ) : (
-                    /* Stores Grid */
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                      {displayedStores.map((store) => (
-                        <StoreCard
-                          key={store.id}
-                          store={store}
-                          searchTerm={activeSearch}
-                          matchedSynonyms={matchedResult?.essence?.synonyms || []}
-                        />
-                      ))}
-                    </div>
-                  )}
+
+                    {displayedStores.length === 0 ? (
+                      <div id="no-stores-matching-filter-view" className="text-center py-16 bg-[#121212] rounded border border-[#d4af37]/20 animate-in fade-in">
+                        <Info className="w-12 h-12 text-[#d4af37]/80 mx-auto mb-3" />
+                        <h4 className="font-serif text-lg text-white font-medium mb-1">Nenhuma loja selecionada</h4>
+                        <p className="text-xs text-coal-400 max-w-xs mx-auto mb-4">
+                          Ajuste os filtros na barra lateral ou clique no botão abaixo para restaurar todos os fornecedores.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={handleSelectAllStores}
+                          className="bg-[#d4af37] hover:bg-[#b5942b] text-[#0a0a0a] text-xs font-bold uppercase tracking-wider px-4 py-2 rounded transition-all"
+                        >
+                          Restaurar todos os fornecedores
+                        </button>
+                      </div>
+                    ) : (
+                      /* Stores Grid */
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {displayedStores.map((store) => (
+                          <StoreCard
+                            key={store.id}
+                            store={store}
+                            searchTerm={activeSearch}
+                            matchedSynonyms={matchedResult?.essence?.synonyms || []}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
 
                 </div>
 
